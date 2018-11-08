@@ -7,12 +7,10 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <!---->
-
     <ImageButton
         android:id="@+id/FindEvent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="276dp"
+        android:layout_height="70dp"
         android:layout_marginStart="46dp"
         android:layout_marginEnd="46dp"
         android:layout_marginBottom="28dp"
@@ -26,8 +24,8 @@
 
     <ImageButton
         android:id="@+id/sportsButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="324dp"
+        android:layout_height="83dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="111dp"
         android:layout_marginEnd="46dp"
