@@ -1,28 +1,25 @@
 package nothelloworld.sociallive;
 
-import android.location.Location;
-
 import java.sql.Time;
 import java.util.Date;
 
 public class Party {
 
     private User host;
-    private Location location;
     private String title;
     private Date date;
     private Time startTime;
     private Time endTime;
-    private String additionalInfo;
+    private String description;
     private int numPeopleGoing;
 
-    public Party(Location location, String title, Date date, Time startTime, Time endTime, int numPeopleGoing) {
-        this.location = location;
+    public Party(String title, Date date, Time startTime, Time endTime, int numPeopleGoing, String description) {
         this.title = title;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.numPeopleGoing = numPeopleGoing;
+        this.description = description;
     }
 
     public void setNumPeopleGoing(int numPeopleGoing) {
@@ -40,14 +37,6 @@ public class Party {
 
     public void setHost(User host) {
         this.host = host;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     public String getTitle() {
@@ -82,11 +71,9 @@ public class Party {
         this.endTime = endTime;
     }
 
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
+    public String getAdditionalInfo() { return description; }
 
     public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
+        this.description = additionalInfo;
     }
 }
