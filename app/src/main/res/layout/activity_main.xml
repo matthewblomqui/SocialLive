@@ -7,36 +7,44 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <!---->
-
-    <ImageButton
-        android:id="@+id/FindEvent"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="28dp"
-        android:contentDescription="Allows user to find event near him"
-        android:onClick="findEventType"
+        android:layout_height="486dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/findEvent"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginEnd="18dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="findEvent"
+        android:text="Find Event"
+        app:layout_constraintBottom_toBottomOf="@+id/createEvent"
+        app:layout_constraintEnd_toStartOf="@+id/createEvent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/createEvent"
+        app:layout_constraintVertical_bias="0.94" />
+
+    <Button
+        android:id="@+id/createEvent"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorPrimary"
+        android:onClick="createEvent"
+        android:text="Creat Event"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sportsButton"
-        app:srcCompat="@drawable/findevent" />
-
-    <ImageButton
-        android:id="@+id/sportsButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="162dp"
-        android:onClick="findSportsEvent"
-        app:layout_constraintBottom_toTopOf="@+id/FindEvent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/download" />
+        app:layout_constraintStart_toEndOf="@+id/findEvent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </android.support.constraint.ConstraintLayout>
