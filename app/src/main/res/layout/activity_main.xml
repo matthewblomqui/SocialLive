@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/base_layout"
     tools:context=".MainActivity"
+    android:background="@color/colorPrimaryDark"
     tools:layout_editor_absoluteY="81dp">
 
     <ScrollView
@@ -37,24 +38,24 @@
 
     <Button
         android:id="@+id/createEvent"
-        android:layout_width="100dp"
+        android:layout_width="107dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="25dp"
         android:background="@color/colorPrimary"
         android:onClick="createEvent"
         android:text="Creat Event"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/findEvent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintStart_toEndOf="@+id/findEvent" />
 
     <!-- This is for the second screen -->
     <android.support.constraint.ConstraintLayout
         android:id="@+id/findEventWindow"
         android:layout_width="match_parent"
-        android:layout_height="598dp"
-        android:background="#fff"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
         android:clickable="true"
         android:elevation="4dp"
         app:layout_constraintStart_toStartOf="parent"

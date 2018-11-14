@@ -1,5 +1,6 @@
 package nothelloworld.sociallive;
 
+import android.app.Dialog;
 import android.graphics.Point;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     public long animationDuration = 1000;
     private ConstraintLayout eventCategoryFinder = null;
 
+    // This is the pop up window to create a new event
+    Dialog createEventDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         // translate the new window off screen without animation before anyone can see it
         eventCategoryFinder.setX(size.x);
+
+        // declare Dialog variable for pop up window
+        createEventDialog = new Dialog(this);
     }
 
     public void launchFindEventWindow(View v) {
@@ -44,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void createEvent(View v) {
 
+        // launch dialog activity
+        createEventDialog.setContentView(R.layout.createpartypopup);
+        createEventDialog.show();
+    }
+
+    public void returnToFeed(View v) {
+
+        // Dismiss the pop up window
+        createEventDialog.dismiss();
     }
 
     public void toBoardGameSuggestions(View v) {
