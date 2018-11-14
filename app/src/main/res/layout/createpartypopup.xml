@@ -61,7 +61,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:text="Push Me!!!!"
-        android:textColor="#fe00"
+        android:textColor="#00cc99"
         android:clickable="true"
         android:onClick="returnToFeed"
         android:background="@drawable/buttonstyling"/>

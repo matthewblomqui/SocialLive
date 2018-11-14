@@ -43,9 +43,10 @@
         android:layout_marginStart="63dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="25dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/buttonstyling"
+        android:textColor="@color/colorAccent"
         android:onClick="createEvent"
-        android:text="Creat Event"
+        android:text="Create Event"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/findEvent" />
