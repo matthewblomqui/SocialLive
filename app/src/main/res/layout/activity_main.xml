@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/base_layout"
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="486dp"
+        android:layout_height="488dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,17 +21,18 @@
 
     <Button
         android:id="@+id/findEvent"
-        android:layout_width="100dp"
+        android:layout_width="107dp"
         android:layout_height="50dp"
         android:layout_marginStart="63dp"
         android:layout_marginEnd="18dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="findEvent"
+        android:onClick="launchFindEventWindow"
         android:text="Find Event"
-        app:layout_constraintBottom_toBottomOf="@+id/createEvent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/createEvent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/createEvent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
         app:layout_constraintVertical_bias="0.94" />
 
     <Button
@@ -46,5 +48,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/findEvent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <!-- This is for the second screen -->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/findEventWindow"
+        android:layout_width="match_parent"
+        android:layout_height="598dp"
+        android:background="#fff"
+        android:clickable="true"
+        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/findBoardGames"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="84dp"
+            android:background="#0000"
+            android:elevation="5dp"
+            android:onClick="toBoardGameSuggestions"
+            android:src="@drawable/download"
+            app:layout_constraintBottom_toTopOf="@+id/imageButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="269dp"
+            android:layout_height="103dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="201dp"
+            android:background="#0000"
+            android:onClick="toVideoGameSuggestions"
+            android:src="@drawable/findevent"
+            app:layout_constraintBottom_toTopOf="@+id/findBoardGames"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/findBoardGames" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
