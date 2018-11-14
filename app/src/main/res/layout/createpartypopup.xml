@@ -1,17 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:layout_height="475dp"
-    android:background="#000"
     android:layout_gravity="center"
+    android:background="#000"
+    android:orientation="vertical"
     android:padding="5dp">
+
     <TextView
-        android:layout_width="30dp"
         android:id="@+id/txtclose"
+        android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="end"
-        android:gravity="center"
-        android:background="@drawable/download"/>
+        android:text="X"
+        android:textColor="#fff"
+        android:gravity="center" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Location"
+        android:textColorHint="#fff"
+        android:textColor="#fff" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="Description"
+        android:textColorHint="#fff"
+        android:textColor="#fff" />
+
+    <EditText
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="Start Time"
+        android:textColorHint="#fff"
+        android:textColor="#fff" />
+
+    <EditText
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:hint="End Time"
+        android:textColorHint="#fff"
+        android:textColor="#fff" />
+
+    <EditText
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:hint="Date"
+        android:textColorHint="#fff"
+        android:textColor="#fff" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="Push Me!!!!"
+        android:textColor="#fe00"
+        android:clickable="true"
+        android:onClick="returnToFeed"
+        android:background="@drawable/buttonstyling"/>
 
 </LinearLayout>
