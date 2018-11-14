@@ -53,8 +53,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/findEventWindow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="598dp"
+        android:background="#fff"
         android:clickable="true"
         android:elevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,15 +62,16 @@
 
         <ImageButton
             android:id="@+id/findBoardGames"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
             android:layout_marginStart="45dp"
             android:layout_marginTop="47dp"
             android:layout_marginEnd="45dp"
-            android:layout_marginBottom="85dp"
+            android:layout_marginBottom="84dp"
             android:background="#0000"
-            android:src="@drawable/download"
+            android:elevation="5dp"
             android:onClick="toBoardGameSuggestions"
+            android:src="@drawable/download"
             app:layout_constraintBottom_toTopOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,30 +79,19 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="269dp"
+            android:layout_height="103dp"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="201dp"
             android:background="#0000"
-            android:src="@drawable/findevent"
             android:onClick="toVideoGameSuggestions"
+            android:src="@drawable/findevent"
             app:layout_constraintBottom_toTopOf="@+id/findBoardGames"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/findBoardGames" />
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginEnd="42dp"
-            android:layout_marginBottom="42dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-        </android.support.v7.widget.SearchView>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
