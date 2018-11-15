@@ -1,17 +1,22 @@
 package nothelloworld.sociallive;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SharedPreferences userPreferences;
 
     // this will populate the popular section of our feed
     private List<Party> popularEvents;
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userPreferences = getSharedPreferences("userName", Context.MODE_PRIVATE);
 
         // find the overlay
         eventCategoryFinder = findViewById(R.id.findEventWindow);
@@ -43,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
         createEventDialog = new Dialog(this);
     }
 
+    public void createIdentification(View v) {
+        // store username from text editor in the login page.
+        SharedPreferences.Editor theEditor = userPreferences.edit();
+        // WARNING: ERROR IS HERE
+        EditText edit = (EditText)findViewById(R.id.username);
+        String result = edit.getText().toString();
+        theEditor.putString("username", result);
+        createEventDialog.dismiss();
+    }
+
     public void launchFindEventWindow(View v) {
 
         //move overlay on screen by animating the x value
@@ -52,8 +68,16 @@ public class MainActivity extends AppCompatActivity {
     public void createEvent(View v) {
 
         // launch dialog activity
-        createEventDialog.setContentView(R.layout.createpartypopup);
-        createEventDialog.show();
+        String userName = userPreferences.getString("username", "nothinghere");
+
+        if (userName == "nothinghere") {
+            createEventDialog.setContentView(R.layout.loginpopup);
+            createEventDialog.show();
+        }
+        else {
+            createEventDialog.setContentView(R.layout.createpartypopup);
+            createEventDialog.show();
+        }
     }
 
     public void returnToFeed(View v) {
