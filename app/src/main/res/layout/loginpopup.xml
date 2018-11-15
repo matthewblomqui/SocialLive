@@ -8,18 +8,19 @@
     android:padding="10dp">
 
     <EditText
-        android:layout_marginTop="150dp"
-        android:id="@+id/username"
+        android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
         android:hint="User Name"
         android:textColorHint="#000" />
 
     <Button
-        android:onClick="createIdentification"
+        android:id="@+id/userButton"
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
+        android:onClick="createIdentification"
         android:text="Create Me!" />
 
 </LinearLayout>
