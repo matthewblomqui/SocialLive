@@ -1,5 +1,6 @@
 package nothelloworld.sociallive;
 
+import android.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -48,9 +49,18 @@ public class MainActivity extends AppCompatActivity {
 
         // declare Dialog variable for pop up window
         createEventDialog = new Dialog(this);
+
+
+
     }
 
-    public void createIdentification(View v) {
+    public void savePreferences(View view){
+        SharedPreferences.Editor theEditor = userPreferences.edit();
+        theEditor.putString("username", String.valueOf(findViewById(R.id.user)));
+        theEditor.commit();
+    }
+
+    public void getAndShowPreferences(View v) {
         String result = "hello";
 
         userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
