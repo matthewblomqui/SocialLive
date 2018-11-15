@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userPreferences = getSharedPreferences("userName", Context.MODE_PRIVATE);
+        userPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
 
         // find the overlay
         eventCategoryFinder = findViewById(R.id.findEventWindow);
@@ -50,12 +51,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createIdentification(View v) {
+        String result = "hello";
+
+        userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor prefEditor = userPreferences.edit();
+        prefEditor.putString("username", result);
         // store username from text editor in the login page.
-        SharedPreferences.Editor theEditor = userPreferences.edit();
+        //SharedPreferences.Editor theEditor = userPreferences.edit();
         // WARNING: ERROR IS HERE
-        EditText edit = (EditText)findViewById(R.id.username);
-        String result = edit.getText().toString();
-        theEditor.putString("username", result);
+        //EditText edit = (EditText)findViewById(R.id.user);
+        prefEditor.apply();
+        //String result = edit.getText().toString();
+        //theEditor.putString("username", result);
+
         createEventDialog.dismiss();
     }
 
