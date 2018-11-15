@@ -1,6 +1,6 @@
 package nothelloworld.sociallive;
 
-import android.R;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -54,14 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void savePreferences(View view){
-        SharedPreferences.Editor theEditor = userPreferences.edit();
-        theEditor.putString("username", String.valueOf(findViewById(R.id.user)));
-        theEditor.commit();
-    }
+    public void createIdentification(View v) {
 
-    public void getAndShowPreferences(View v) {
-        String result = "hello";
+        EditText edit = (EditText)createEventDialog.findViewById(R.id.user);
+        String result = edit.getText().toString();
 
         userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor prefEditor = userPreferences.edit();
@@ -69,9 +65,7 @@ public class MainActivity extends AppCompatActivity {
         // store username from text editor in the login page.
         //SharedPreferences.Editor theEditor = userPreferences.edit();
         // WARNING: ERROR IS HERE
-        //EditText edit = (EditText)findViewById(R.id.user);
         prefEditor.apply();
-        //String result = edit.getText().toString();
         //theEditor.putString("username", result);
 
         createEventDialog.dismiss();
@@ -88,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         // launch dialog activity
         String userName = userPreferences.getString("username", "nothinghere");
 
-        if (userName == "nothinghere") {
+        if (userName.equals("nothinghere")) {
             createEventDialog.setContentView(R.layout.loginpopup);
             createEventDialog.show();
         }
