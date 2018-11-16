@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import java.util.List;
 
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     // This is the pop up window to create a new event
     Dialog createEventDialog;
+    Dialog createLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         // declare Dialog variable for pop up window
         createEventDialog = new Dialog(this);
+        createLogin = new Dialog(this);
 
 
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void createIdentification(View v) {
 
-        EditText edit = (EditText)createEventDialog.findViewById(R.id.user);
+        EditText edit = (EditText)createLogin.findViewById(R.id.user);
         String result = edit.getText().toString();
 
         userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -65,10 +66,11 @@ public class MainActivity extends AppCompatActivity {
         // store username from text editor in the login page.
         //SharedPreferences.Editor theEditor = userPreferences.edit();
         // WARNING: ERROR IS HERE
+
         prefEditor.apply();
         //theEditor.putString("username", result);
 
-        createEventDialog.dismiss();
+        createLogin.dismiss();
     }
 
     public void launchFindEventWindow(View v) {
@@ -83,11 +85,13 @@ public class MainActivity extends AppCompatActivity {
         String userName = userPreferences.getString("username", "nothinghere");
 
         if (userName.equals("nothinghere")) {
-            createEventDialog.setContentView(R.layout.loginpopup);
-            createEventDialog.show();
+            createLogin.setContentView(R.layout.loginpopup);
+            createLogin.show();
         }
         else {
             createEventDialog.setContentView(R.layout.createpartypopup);
+            EditText p = (EditText)createEventDialog.findViewById(R.id.editText2);
+            p.setText(userName);
             createEventDialog.show();
         }
     }
@@ -106,5 +110,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void toVideoGameSuggestions(View v) {
 
+    }
+
+    /**************************************************************
+     *  If the below function is run, we are on the page listing
+     *  the the different categories. We want to go back to the feed
+     *  Do this by using object animator for all the different windows.
+     *  And making the Categories page invisible again.
+     **************************************************************/
+    public void returnToFeedFromCategoriesPage(View view) {
+        // Finish this later
     }
 }
