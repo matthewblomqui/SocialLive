@@ -1,6 +1,5 @@
 package nothelloworld.sociallive;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -56,12 +55,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void createIdentification(View v) {
 
-        EditText edit = (EditText)createEventDialog.findViewById(R.id.user);
+        EditText edit = (EditText) createEventDialog.findViewById(R.id.user);
         String result = edit.getText().toString();
+    }
 
+//put in this to test if we can properly save the preferences when called
+    //public void savePreferences(View view){
+
+        //SharedPreferences.Editor theEditor = userPreferences.edit();
+        //making sure to commit the changes to the sharedPrederences editor
+        //prefEditor.putString("username", String.valueOf(findViewById(R.id.user)));
+       // theEditor.commit();
+    //}
+
+    public void getAndShowPreferences(View v) {
+        String result = "hello";
+        //thinking of editing this so that its more similar to the save preferences changes
         userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor prefEditor = userPreferences.edit();
         prefEditor.putString("username", result);
+        prefEditor.putString("username", String.valueOf(findViewById(R.id.user)));
         // store username from text editor in the login page.
         //SharedPreferences.Editor theEditor = userPreferences.edit();
         // WARNING: ERROR IS HERE
