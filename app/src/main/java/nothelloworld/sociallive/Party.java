@@ -2,6 +2,7 @@ package nothelloworld.sociallive;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 public class Party {
 
@@ -12,6 +13,7 @@ public class Party {
     private Time endTime;
     private String description;
     private int numPeopleGoing;
+
 
     public Party(String title, Date date, Time startTime, Time endTime, int numPeopleGoing, String description) {
         this.title = title;
