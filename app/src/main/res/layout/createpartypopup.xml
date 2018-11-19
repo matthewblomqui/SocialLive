@@ -63,7 +63,7 @@
         android:text="Push Me!!!!"
         android:textColor="#00cc99"
         android:clickable="true"
-        android:onClick="returnToFeed"
+        android:onClick="returnToFeedFromCreateEventPopUp"
         android:background="@drawable/buttonstyling"/>
 
 </LinearLayout>
