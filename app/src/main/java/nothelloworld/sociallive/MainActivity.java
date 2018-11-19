@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
      * **********************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         userPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
@@ -57,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         // declare Dialog variable for pop up window
         createEventDialog = new Dialog(this);
-
-
-
     }
 
     /*********************************************************************************
@@ -144,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * **********************************************************************************/
     public void toVideoGameSuggestions(View v) {
-        
+
     }
 
      /*********************************************************************************
