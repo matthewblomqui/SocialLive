@@ -94,6 +94,91 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/findBoardGames" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:elevation="8dp"
+            android:background="#000"
+            android:id="@+id/categoriesLayout">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="480dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="480dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:background="#000">
+
+                    <ImageButton
+                        android:id="@+id/SmashBrosNight"
+                        android:layout_width="300dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:text="Smash Bros Night?"/>
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/SettlersOfCatan"
+                        android:layout_width="300dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"/>
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        />
+
+                    <ImageButton
+                        android:layout_width="300dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/ChessNight"
+                        android:layout_marginTop="15dp"/>
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"/>
+
+                    <ImageButton
+                        android:layout_width="300dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"/>
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+            </ScrollView>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="50dp"
+                android:onClick="returnToFeedFromCategoriesPage"
+                android:background="@drawable/buttonstyling"
+                android:text="To Feed"
+                android:textColor="@color/colorAccent"/>
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
