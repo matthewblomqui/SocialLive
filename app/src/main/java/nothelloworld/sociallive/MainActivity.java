@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor prefEditor = userPreferences.edit();
         prefEditor.putString("username", result);
+        Log.a("Hello?!");
         // store username from text editor in the login page.
 
         prefEditor.apply();
