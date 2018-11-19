@@ -73,16 +73,22 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor prefEditor = userPreferences.edit();
         prefEditor.putString("username", result);
         // store username from text editor in the login page.
-        //SharedPreferences.Editor theEditor = userPreferences.edit();
-        // WARNING: ERROR IS HERE
 
         prefEditor.apply();
-        //theEditor.putString("username", result);
 
         createEventDialog.dismiss();
 
-        // now return us to the other window.
+        // now return us to the window that can create an event.
         createEventDialog.setContentView(R.layout.createpartypopup);
+        createEventDialog.show();
+    }
+
+    /*******************************************************************************
+     * We will work on this later. The goal of this is to populate the feed
+     * window with the most popular events.
+     *******************************************************************************/
+    public void populatePopularFeed() {
+
     }
 
     /*********************************************************************************
