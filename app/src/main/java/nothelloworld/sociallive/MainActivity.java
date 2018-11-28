@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +17,9 @@ import android.widget.LinearLayout;
 
 import java.util.List;
 
+/**
+ * EVERYTHING IS HERE
+ */
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences userPreferences;
@@ -31,10 +35,11 @@ public class MainActivity extends AppCompatActivity {
     // This is the pop up window to create a new event
     Dialog createEventDialog;
 
-    /*********************************************************************************
+    /**
      * On create. Create all of the backbone of what we are doing by creating and
-     * initializing the variables.
-     * **********************************************************************************/
+     * initializing the vaiables.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -60,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
         createEventDialog = new Dialog(this);
     }
 
-    /*********************************************************************************
-     * The user has just created a username and hit save. Now let's save their
-     * username and then launch the create event window.
-     * **********************************************************************************/
+    /**
+     * The user has just created a username and hit save. Now let's save their username
+     * and then launch the create event window.
+     * @param v
+     */
     public void createIdentification(View v) {
 
         EditText edit = (EditText)createEventDialog.findViewById(R.id.user);
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor prefEditor = userPreferences.edit();
         prefEditor.putString("username", result);
-        Log.a("Hello?!");
+        Log.v("A message", "Hello?!");
         // store username from text editor in the login page.
 
         prefEditor.apply();
@@ -85,27 +91,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*******************************************************************************
-     * We will work on this later. The goal of this is to populate the feed
-     * window with the most popular events.
+     * TODO:
+     * We will work on this later.
      *******************************************************************************/
+    /**
+     * The goal of this is to populate the feed window with the most popular events.
+     */
     public void populatePopularFeed() {
 
     }
 
-    /*********************************************************************************
+    /**
      * Launch the find event window, animate it onto the screen.
-     * then we are done! Pretty simple ay?
-     * **********************************************************************************/
+     * @param v
+     */
     public void launchFindEventWindow(View v) {
 
         //move overlay on screen by animating the x value
         eventCategoryFinder.animate().x(0).setDuration(animationDuration);
     }
 
-    /*********************************************************************************
+    /**
      * Launch the create event window. But first, check if the user is signed in, with
      * their username and password saved into Shared Preferences.
-     * **********************************************************************************/
+     * @param v
+     */
     public void createEvent(View v) {
 
         // launch dialog activity
@@ -121,20 +131,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*********************************************************************************
-     * Simply dismiss the pop up to create an event.
-     *
-     * **********************************************************************************/
+    /**
+     * TODO: Make the pop up (x) buttons clickable
+     * Dismiss the pop up to create an event.
+     * @param v
+     */
     public void returnToFeedFromCreateEventPopUp(View v) {
 
         // Dismiss the pop up window
         createEventDialog.dismiss();
     }
 
-    /*********************************************************************************
+    /**
      * Launch the Board Game Suggestions page
-     *
-     * **********************************************************************************/
+     * @param v
+     */
     public void toBoardGameSuggestions(View v) {
 
         // first things first, get the current window off the screen.
@@ -144,18 +155,19 @@ public class MainActivity extends AppCompatActivity {
         categoriesLayout.animate().x(0).setDuration(animationDuration);
     }
 
-    /*********************************************************************************
-     * This will launch the video game suggestions page.
-     *
-     * **********************************************************************************/
+    /**
+     * Launch the Video Game Suggestion page.
+     * @param v
+     */
     public void toVideoGameSuggestions(View v) {
 
     }
 
-     /*********************************************************************************
+    /**
      * Return to the feed from the categories page, by pushing off the categories page
      * as well as the event find page.
-     * **********************************************************************************/
+     * @param v
+     */
     public void returnToFeedFromCategoriesPage(View v) {
 
         // Push the categories page off the screen
