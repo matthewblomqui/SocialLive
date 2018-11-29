@@ -9,12 +9,19 @@ import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
     // This is the pop up window to create a new event
     Dialog createEventDialog;
 
+    // These are variables for saving parties into our real-time database
+    EditText locationOfParty;
+    EditText descriptionOfParty;
+    EditText startTimeOfParty;
+    EditText endTimeOfParty;
+    EditText dateOfParty;
+    Button buttonCreateParty;
+
+
+    DatabaseReference databaseParties;
     /**
      * On create. Create all of the backbone of what we are doing by creating and
      * initializing the vaiables.
@@ -63,6 +80,29 @@ public class MainActivity extends AppCompatActivity {
 
         // declare Dialog variable for pop up window
         createEventDialog = new Dialog(this);
+
+        // connect to the real-time database
+        databaseParties = FirebaseDatabase.getInstance().getReference("parties");
+
+        createEventDialog.setContentView(R.layout.createpartypopup);
+        // create variables to store any parties the user might create in the database
+        locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
+        descriptionOfParty = (EditText) createEventDialog.findViewById(R.id.eventDescription);
+        startTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventStartTime);
+        endTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventEndTime);
+        dateOfParty = (EditText) createEventDialog.findViewById(R.id.eventDate);
+        buttonCreateParty = (Button) createEventDialog.findViewById(R.id.createEventButton);
+
+        // when the button is pressed, we add the party to the database
+        buttonCreateParty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPartyToDatabase();
+            }
+        });
+
+
+
     }
 
     /**
@@ -139,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
     public void returnToFeedFromCreateEventPopUp(View v) {
 
         // Dismiss the pop up window
+        addPartyToDatabase();
         createEventDialog.dismiss();
     }
 
@@ -176,5 +217,30 @@ public class MainActivity extends AppCompatActivity {
         // if the find events page is still on screen, push it off.
         if (eventCategoryFinder.getX() == 0)
             eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
+    }
+
+    private void addPartyToDatabase() {
+        String location = locationOfParty.getText().toString().trim();
+        String description = descriptionOfParty.getText().toString().trim();
+        String startTime = startTimeOfParty.getText().toString().trim();
+        String endTime = endTimeOfParty.getText().toString().trim();
+        String date = dateOfParty.getText().toString().trim();
+        String dateCreated = new java.util.Date().toString();
+
+        //if (!TextUtils.isEmpty(location)) {
+            String id = databaseParties.push().getKey();
+
+            //Party party = new Party(location, description, startTime, endTime,
+                    //date, dateCreated, id);
+            Party party = new Party("BYUi", "SWAG", "now", "later",
+                    "11/31/18", "today", id);
+
+            databaseParties.child(id).setValue(party);
+
+            Toast.makeText(this, "Party Created", Toast.LENGTH_LONG).show();
+        //}
+        //else {
+  //          Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
+    //    }
     }
 }
