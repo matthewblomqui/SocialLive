@@ -53,18 +53,18 @@
         android:textColor="#fff" />
 
     <EditText
-        android:id="@+id/eventDate"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:hint="Date"
+        android:id="@+id/eventDate"
         android:textColorHint="#fff"
         android:textColor="#fff" />
 
     <Button
-        android:id="@+id/createEventButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:id="@+id/createEventButton"
         android:text="Push Me!!!!"
         android:textColor="#00cc99"
         android:clickable="true"

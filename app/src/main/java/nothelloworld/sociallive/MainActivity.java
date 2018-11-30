@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     Dialog createEventDialog;
 
     // These are variables for saving parties into our real-time database
-    EditText locationOfParty;
+    private EditText locationOfParty;
     EditText descriptionOfParty;
     EditText startTimeOfParty;
     EditText endTimeOfParty;
@@ -85,13 +86,16 @@ public class MainActivity extends AppCompatActivity {
         databaseParties = FirebaseDatabase.getInstance().getReference("parties");
 
         createEventDialog.setContentView(R.layout.createpartypopup);
+
         // create variables to store any parties the user might create in the database
         locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
         descriptionOfParty = (EditText) createEventDialog.findViewById(R.id.eventDescription);
         startTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventStartTime);
         endTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventEndTime);
         dateOfParty = (EditText) createEventDialog.findViewById(R.id.eventDate);
-        buttonCreateParty = (Button) createEventDialog.findViewById(R.id.createEventButton);
+        buttonCreateParty = createEventDialog.findViewById(R.id.createEventButton);
+
+       // Log.d("Main Activity", "location of party: "+locationOfParty);
 
         // when the button is pressed, we add the party to the database
         buttonCreateParty.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
         EditText edit = (EditText)createEventDialog.findViewById(R.id.user);
         String result = edit.getText().toString();
+
+        Log.d("Main Activity", "Storing this into shared preferences "+result);
 
         userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor prefEditor = userPreferences.edit();
@@ -220,6 +226,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addPartyToDatabase() {
+
+        //TODO: add these EditText and delete above!!
+        //EditText locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
         String location = locationOfParty.getText().toString().trim();
         String description = descriptionOfParty.getText().toString().trim();
         String startTime = startTimeOfParty.getText().toString().trim();
@@ -227,20 +236,20 @@ public class MainActivity extends AppCompatActivity {
         String date = dateOfParty.getText().toString().trim();
         String dateCreated = new java.util.Date().toString();
 
-        //if (!TextUtils.isEmpty(location)) {
+        Log.d("Main Activity", "location: "+location);
+
+        if (!TextUtils.isEmpty(location)) {
             String id = databaseParties.push().getKey();
 
-            //Party party = new Party(location, description, startTime, endTime,
-                    //date, dateCreated, id);
-            Party party = new Party("BYUi", "SWAG", "now", "later",
-                    "11/31/18", "today", id);
+            Party party = new Party(location, description, startTime, endTime,
+                    date, dateCreated, id);
 
             databaseParties.child(id).setValue(party);
 
             Toast.makeText(this, "Party Created", Toast.LENGTH_LONG).show();
-        //}
-        //else {
-  //          Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
-    //    }
+        }
+        else {
+            Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
+        }
     }
 }

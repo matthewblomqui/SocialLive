@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+
 public class Party {
 
     //private User host;
@@ -16,6 +17,16 @@ public class Party {
     private String dateCreated;
     private String partyId;
 
+    /**
+     *
+     * @param location
+     * @param description
+     * @param startTime
+     * @param endTime
+     * @param date
+     * @param dateCreated
+     * @param partyId
+     */
     public Party(String location, String description, String startTime,
                  String endTime, String date, String dateCreated,
                  String partyId)

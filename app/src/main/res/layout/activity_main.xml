@@ -35,8 +35,7 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
 
             <ImageButton
                 android:layout_width="300dp"
