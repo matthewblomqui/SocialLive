@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     // have to do with animations regarding the different windows.
     public long animationDuration = 1000;
-    private ConstraintLayout eventCategoryFinder = null;
+    private LinearLayout eventCategoryFinder = null;
     private LinearLayout categoriesLayout = null;
 
     // This is the pop up window to create a new event
@@ -223,6 +223,15 @@ public class MainActivity extends AppCompatActivity {
         // if the find events page is still on screen, push it off.
         if (eventCategoryFinder.getX() == 0)
             eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
+    }
+
+    /**
+     * Return from find event page back to first page
+     * @param v
+     */
+    public void backToFrontPage(View v) {
+        // move overlay
+        eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
     }
 
     private void addPartyToDatabase() {

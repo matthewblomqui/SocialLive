@@ -107,49 +107,212 @@
         app:layout_constraintStart_toEndOf="@+id/findEvent" />
 
     <!-- This is for the second screen -->
-    <android.support.constraint.ConstraintLayout
+    <!-- Find event window constraint -->
+    <LinearLayout
         android:id="@+id/findEventWindow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:elevation="4dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/findBoardGames"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="47dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="84dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:background="@color/colorPrimary"
             android:elevation="5dp"
             android:onClick="toBoardGameSuggestions"
-            android:src="@drawable/download"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/boardgamebutton" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="269dp"
-            android:layout_height="103dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="201dp"
-            android:background="@color/colorPrimary"
-            android:onClick="toVideoGameSuggestions"
-            android:src="@drawable/findevent"
-            app:layout_constraintBottom_toTopOf="@+id/findBoardGames"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/findBoardGames" />
+        <FrameLayout
+            android:layout_margin="10dp"
+            android:layout_width="365dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center">
+
+            <ImageButton
+                android:id="@+id/findVideoGames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:onClick="toVideoGameSuggestions"
+                android:scaleType="fitCenter"
+                android:src="@drawable/videogamebutton" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#777a"
+                android:textColor="@color/colorHighlight"
+                android:textSize="40dp"
+                android:text="Video Games" />
+
+        </FrameLayout>
 
 
+        <HorizontalScrollView
+            android:layout_margin="10dp"
+            android:layout_width="353dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center">
+
+
+            <LinearLayout
+                android:id="@+id/suggestionBar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button1"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorHighlight"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/smashbros" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="#7778"
+                        android:text="Super Smash Bros"
+                        android:textColor="@color/colorHighlight" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button2"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorHighlight"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/smashbros" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="#7778"
+                        android:text="Super Smash Bros"
+                        android:textColor="@color/colorHighlight" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button3"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorHighlight"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/smashbros" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="#7778"
+                        android:text="Super Smash Bros"
+                        android:textColor="@color/colorHighlight" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button4"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorHighlight"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/smashbros" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="#7778"
+                        android:text="Super Smash Bros"
+                        android:textColor="@color/colorHighlight" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageButton
+                        android:id="@+id/button5"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorHighlight"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/smashbros" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="#7778"
+                        android:text="Super Smash Bros"
+                        android:textColor="@color/colorHighlight" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="75dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorPrimaryLight"
+                android:onClick="backToFrontPage"
+                app:srcCompat="@android:drawable/ic_menu_revert" />
+
+            <SearchView
+                android:id="@+id/searchBar"
+                android:iconifiedByDefault="false"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@color/colorPrimaryLight" />
+
+        </LinearLayout>
+
+        <!--Need to fix this, Screen doesn't properly animate -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -233,6 +396,7 @@
                 android:text="To Feed"
                 android:textColor="@color/colorAccent"/>
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
