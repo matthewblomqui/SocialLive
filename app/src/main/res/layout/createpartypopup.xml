@@ -18,6 +18,7 @@
         android:gravity="center" />
 
     <EditText
+        android:id="@+id/eventLocation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Location"
@@ -25,7 +26,7 @@
         android:textColor="#fff" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/eventDescription"
         android:layout_width="match_parent"
         android:layout_height="91dp"
         android:ems="10"
@@ -35,6 +36,7 @@
         android:textColor="#fff" />
 
     <EditText
+        android:id="@+id/eventStartTime"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -43,6 +45,7 @@
         android:textColor="#fff" />
 
     <EditText
+        android:id="@+id/eventEndTime"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:hint="End Time"
@@ -50,13 +53,15 @@
         android:textColor="#fff" />
 
     <EditText
+        android:id="@+id/eventDate"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:hint="Date"
         android:textColorHint="#fff"
         android:textColor="#fff" />
 
-    <TextView
+    <Button
+        android:id="@+id/createEventButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
