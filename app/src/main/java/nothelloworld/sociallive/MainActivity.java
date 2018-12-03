@@ -43,15 +43,6 @@ public class MainActivity extends AppCompatActivity {
     // This is the pop up window to create a new event
     Dialog createEventDialog;
 
-    // These are variables for saving parties into our real-time database
-    private EditText locationOfParty;
-    EditText descriptionOfParty;
-    EditText startTimeOfParty;
-    EditText endTimeOfParty;
-    EditText dateOfParty;
-    Button buttonCreateParty;
-
-
     DatabaseReference databaseParties;
     /**
      * On create. Create all of the backbone of what we are doing by creating and
@@ -86,24 +77,6 @@ public class MainActivity extends AppCompatActivity {
         databaseParties = FirebaseDatabase.getInstance().getReference("parties");
 
         createEventDialog.setContentView(R.layout.createpartypopup);
-
-        // create variables to store any parties the user might create in the database
-        locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
-        descriptionOfParty = (EditText) createEventDialog.findViewById(R.id.eventDescription);
-        startTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventStartTime);
-        endTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventEndTime);
-        dateOfParty = (EditText) createEventDialog.findViewById(R.id.eventDate);
-        buttonCreateParty = createEventDialog.findViewById(R.id.createEventButton);
-
-       // Log.d("Main Activity", "location of party: "+locationOfParty);
-
-        // when the button is pressed, we add the party to the database
-        buttonCreateParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addPartyToDatabase();
-            }
-        });
 
 
 
@@ -237,7 +210,13 @@ public class MainActivity extends AppCompatActivity {
     private void addPartyToDatabase() {
 
         //TODO: add these EditText and delete above!!
-        //EditText locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
+        EditText locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
+        EditText descriptionOfParty = (EditText) createEventDialog.findViewById(R.id.eventDescription);
+        EditText startTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventStartTime);
+        EditText endTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventEndTime);
+        EditText dateOfParty = (EditText) createEventDialog.findViewById(R.id.eventDate);
+        EditText buttonCreateParty = createEventDialog.findViewById(R.id.createEventButton);
+
         String location = locationOfParty.getText().toString().trim();
         String description = descriptionOfParty.getText().toString().trim();
         String startTime = startTimeOfParty.getText().toString().trim();
