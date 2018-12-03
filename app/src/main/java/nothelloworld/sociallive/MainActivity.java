@@ -26,6 +26,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ *
+ * TODO: My events page (coming from the left side)
+ * TODO: Add a filter button to change my events to events going to
+ * TODO: Search bar and slide up with that bar
+ * TODO: Pulling from and pushing with the database (emphasize images and pulling data)
+ * TODO: User authentication with firebase
+ * TODO: Pattern checking with the create events page
+ * ToDO: using recycle view and cardvies to display content from database
  * EVERYTHING IS HERE
  */
 public class MainActivity extends AppCompatActivity {
