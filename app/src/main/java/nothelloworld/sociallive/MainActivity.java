@@ -13,16 +13,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,8 +29,7 @@ import java.util.List;
  * TODO: Search bar and slide up with that bar
  * TODO: Pulling from and pushing with the database (emphasize images and pulling data)
  * TODO: User authentication with firebase
- * TODO: Pattern checking with the create events page
- * ToDO: using recycle view and cardvies to display content from database
+ * TODO: using recycle view and cardvies to display content from database
  * EVERYTHING IS HERE
  */
 public class MainActivity extends AppCompatActivity {
@@ -166,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
     public void returnToFeedFromCreateEventPopUp(View v) {
 
         // Dismiss the pop up window
-        addPartyToDatabase();
-        createEventDialog.dismiss();
+        if (addPartyToDatabase())
+            createEventDialog.dismiss();
     }
 
     /**
@@ -215,7 +211,53 @@ public class MainActivity extends AppCompatActivity {
         eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
     }
 
-    private void addPartyToDatabase() {
+    /**
+     *
+     * @param date String that is what the user entered for the date in the create event page
+     * @return true if the date has
+     */
+    public boolean checkDateString(String date) {
+
+        for (int i = 0; i < 2; i++)
+            if (!Character.isDigit(date.charAt(i))) return false;
+
+        if (date.charAt(2) != '-') return false;
+
+        for (int i = 3; i < 5; i++)
+            if (!Character.isDigit(date.charAt(i))) return false;
+
+        return true;
+    }
+
+    /**
+     *
+     * @param time is the string that the user specifies regarding time of the event
+     * @return
+     */
+    public boolean checkStartTime(String time) {
+
+        if (time.length() != 7) return false;
+
+        for (int i = 0; i < 2; i++)
+            if (!Character.isDigit(time.charAt(i))) return false;
+
+        if (time.charAt(2) != ':') return false;
+
+        for (int i = 3; i < 5; i++)
+            if (!Character.isDigit(time.charAt(i))) return false;
+
+        String beyondMidnight = time.substring(5);
+
+        if (!beyondMidnight.equals("AM") && !beyondMidnight.equals("PM")) return false;
+
+        return true;
+    }
+
+    /**
+     * Create a new party and add it to the database.
+     * @return true if the user entered valid credentials. If not, then don't.
+     */
+    private boolean addPartyToDatabase() {
 
         //TODO: add these EditText and delete above!!
         EditText locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
@@ -232,6 +274,16 @@ public class MainActivity extends AppCompatActivity {
         String date = dateOfParty.getText().toString().trim();
         String dateCreated = new java.util.Date().toString();
 
+        // working on pattern checking for location
+        if (!checkDateString(date)) {
+            Toast.makeText(this, "Put in a valid Date!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
+            Toast.makeText(this, "Put in a valid start time!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         Log.d("Main Activity", "location: "+location);
 
         if (!TextUtils.isEmpty(location)) {
@@ -243,9 +295,11 @@ public class MainActivity extends AppCompatActivity {
             databaseParties.child(id).setValue(party);
 
             Toast.makeText(this, "Party Created", Toast.LENGTH_LONG).show();
+            return true;
         }
         else {
             Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
+            return false;
         }
     }
 }
