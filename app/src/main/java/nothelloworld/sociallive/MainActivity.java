@@ -4,13 +4,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.preference.PreferenceManager;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -72,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         eventCategoryFinder.setX(size.x);
         categoriesLayout.setX(size.x);
 
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         // declare Dialog variable for pop up window
         createEventDialog = new Dialog(this);
@@ -81,9 +86,31 @@ public class MainActivity extends AppCompatActivity {
 
         createEventDialog.setContentView(R.layout.createpartypopup);
 
-
-
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+        new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment selectedFragment = null;
+
+                switch(menuItem.getItemId()) {
+                    case R.id.nav_home:
+                        selectedFragment = new HomeFragment();
+                        break;
+
+                    case R.id.nav_find:
+                        selectedFragment = new HomeFragment();
+                        break;
+
+                    case R.id.nav_create:
+                        selectedFragment = new HomeFragment();
+                        break;
+                }
+                return true;
+                // TODO: MAT GO FROM HERE IN THE VIDEO
+            };
+        };
 
     /**
      * The user has just created a username and hit save. Now let's save their username
