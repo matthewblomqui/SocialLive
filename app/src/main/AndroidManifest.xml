@@ -16,10 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FindEvents" />
-        <activity android:name=".Category" />
-        <activity android:name=".MyEventsPage" />
-        <activity android:name=".EventsAttending"></activity>
     </application>
 
 </manifest>

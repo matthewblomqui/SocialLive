@@ -26,13 +26,13 @@ import java.util.List;
 
 /**
  *
- * TODO: My events page (coming from the left side)
- * TODO: Add a filter button to change my events to events going to
+ * TODO: <MYEVENTSFRAGMENT>Dialog for viewing events (myEvents and events going to)
+ * TODO: <CREATEEVENTFRAGMENT>copy past create event page and add picture capability from database
+ * TODO: <SEARCHFRAGRMENT>copy past search page, add dialog pop up for categories
+ * TODO: <HOME> implement recycle view
  * TODO: Search bar and slide up with that bar
  * TODO: Pulling from and pushing with the database (emphasize images and pulling data)
  * TODO: User authentication with firebase
- * TODO: using recycle view and cardvies to display content from database
- * EVERYTHING IS HERE
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         userPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
 
         // find the overlay
-        eventCategoryFinder = findViewById(R.id.findEventWindow);
-        categoriesLayout = findViewById(R.id.categoriesLayout);
+        //eventCategoryFinder = findViewById(R.id.findEventWindow);
+        //categoriesLayout = findViewById(R.id.categoriesLayout);
 
         // Get the size of the screen/window
         Display display = getWindowManager().getDefaultDisplay();
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
         display.getSize(size);
 
         // translate the new window off screen without animation before anyone can see it
-        eventCategoryFinder.setX(size.x);
-        categoriesLayout.setX(size.x);
+        //eventCategoryFinder.setX(size.x);
+        //categoriesLayout.setX(size.x);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -100,16 +100,19 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_find:
-                        selectedFragment = new HomeFragment();
+                        selectedFragment = new FindEventFragment();
                         break;
 
                     case R.id.nav_create:
-                        selectedFragment = new HomeFragment();
+                        selectedFragment = new CreateEventFragment();
+                        break;
+
+                    case R.id.nav_my_events:
+                        selectedFragment = new MyEventFragment();
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                 return true;
-                // TODO: MAT GO FROM HERE IN THE VIDEO
             }
         };
 
@@ -142,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*******************************************************************************
-     * TODO:
+     * TODO: from above list (recycle view)
      * We will work on this later.
      *******************************************************************************/
     /**
@@ -183,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO: Make the pop up (x) buttons clickable
      * Dismiss the pop up to create an event.
      * @param v
      */
@@ -285,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean addPartyToDatabase() {
 
-        //TODO: add these EditText and delete above!!
         EditText locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
         EditText descriptionOfParty = (EditText) createEventDialog.findViewById(R.id.eventDescription);
         EditText startTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventStartTime);
@@ -328,7 +329,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
-
 
     /**
      * return to the main feed from the create event pop up.
