@@ -1,6 +1,5 @@
 package nothelloworld.sociallive;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -248,9 +247,7 @@ public class MainActivity extends AppCompatActivity {
 
         String beyondMidnight = time.substring(5);
 
-        if (!beyondMidnight.equals("AM") && !beyondMidnight.equals("PM")) return false;
-
-        return true;
+        return (!beyondMidnight.equals("AM") && !beyondMidnight.equals("PM"));
     }
 
     /**
@@ -301,5 +298,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
             return false;
         }
+    }
+
+
+    /**
+     * return to the main feed from the create event pop up.
+     */
+    public void returnToFeedFromCreateEventPopUpFromTextView() {
+
+        createEventDialog.dismiss();
     }
 }
