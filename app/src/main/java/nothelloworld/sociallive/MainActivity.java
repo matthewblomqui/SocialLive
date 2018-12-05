@@ -107,10 +107,12 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new HomeFragment();
                         break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                 return true;
                 // TODO: MAT GO FROM HERE IN THE VIDEO
-            };
+            }
         };
+
 
     /**
      * The user has just created a username and hit save. Now let's save their username
