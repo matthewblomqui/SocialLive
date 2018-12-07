@@ -83,6 +83,7 @@
         android:layout_marginBottom="14dp"
         android:background="@drawable/buttonstyling"
         android:clickable="true"
+        android:onClick="addPartyToDatabase"
         android:text="Create Event"
         android:textColor="#00cc99" />
 

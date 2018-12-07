@@ -151,95 +151,95 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The goal of this is to populate the feed window with the most popular events.
      */
-    public void populatePopularFeed() {
-
-    }
+//    public void populatePopularFeed() {
+//
+//    }
 
     /**
      * Launch the find event window, animate it onto the screen.
      * @param v
      */
-    public void launchFindEventWindow(View v) {
-
-        //move overlay on screen by animating the x value
-        eventCategoryFinder.animate().x(0).setDuration(animationDuration);
-    }
+//    public void launchFindEventWindow(View v) {
+//
+//        //move overlay on screen by animating the x value
+//        eventCategoryFinder.animate().x(0).setDuration(animationDuration);
+//    }
 
     /**
      * Launch the create event window. But first, check if the user is signed in, with
      * their username and password saved into Shared Preferences.
      * @param v
      */
-    public void createEvent(View v) {
-
-        // launch dialog activity
-        String userName = userPreferences.getString("username", "nothinghere");
-
-        if (userName.equals("nothinghere")) {
-            createEventDialog.setContentView(R.layout.loginpopup);
-            createEventDialog.show();
-        }
-        else {
-            createEventDialog.setContentView(R.layout.createpartypopup);
-            createEventDialog.show();
-        }
-    }
+//    public void createEvent(View v) {
+//
+//        // launch dialog activity
+//        String userName = userPreferences.getString("username", "nothinghere");
+//
+//        if (userName.equals("nothinghere")) {
+//            createEventDialog.setContentView(R.layout.loginpopup);
+//            createEventDialog.show();
+//        }
+//        else {
+//            createEventDialog.setContentView(R.layout.createpartypopup);
+//            createEventDialog.show();
+//        }
+//    }
 
     /**
      * Dismiss the pop up to create an event.
      * @param v
      */
-    public void returnToFeedFromCreateEventPopUp(View v) {
-
-        // Dismiss the pop up window
-        if (addPartyToDatabase())
-            createEventDialog.dismiss();
-    }
+//    public void returnToFeedFromCreateEventPopUp(View v) {
+//
+//        // Dismiss the pop up window
+//        if (addPartyToDatabase())
+//            createEventDialog.dismiss();
+//    }
 
     /**
      * Launch the Board Game Suggestions page
      * @param v
      */
-    public void toBoardGameSuggestions(View v) {
-
-        // first things first, get the current window off the screen.
-        eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
-
-        // move overlay
-        categoriesLayout.animate().x(0).setDuration(animationDuration);
-    }
+//    public void toBoardGameSuggestions(View v) {
+//
+//        // first things first, get the current window off the screen.
+//        eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
+//
+//        // move overlay
+//        categoriesLayout.animate().x(0).setDuration(animationDuration);
+//    }
 
     /**
      * Launch the Video Game Suggestion page.
      * @param v
      */
-    public void toVideoGameSuggestions(View v) {
-
-    }
+//    public void toVideoGameSuggestions(View v) {
+//
+//    }
 
     /**
      * Return to the feed from the categories page, by pushing off the categories page
      * as well as the event find page.
      * @param v
      */
-    public void returnToFeedFromCategoriesPage(View v) {
-
-        // Push the categories page off the screen
-        categoriesLayout.animate().x(categoriesLayout.getWidth()).setDuration(animationDuration);
-
-        // if the find events page is still on screen, push it off.
-        if (eventCategoryFinder.getX() == 0)
-            eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
-    }
+//    public void returnToFeedFromCategoriesPage(View v) {
+//
+//        // Push the categories page off the screen
+//        categoriesLayout.animate().x(categoriesLayout.getWidth()).setDuration(animationDuration);
+//
+//        // if the find events page is still on screen, push it off.
+//        if (eventCategoryFinder.getX() == 0)
+//            eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
+//    }
 
     /**
      * Return from find event page back to first page
      * @param v
      */
-    public void backToFrontPage(View v) {
-        // move overlay
-        eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
-    }
+//    public void backToFrontPage(View v) {
+//        // move overlay
+//        eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
+//    }
 
     /**
      *
@@ -285,14 +285,14 @@ public class MainActivity extends AppCompatActivity {
      * Create a new party and add it to the database.
      * @return true if the user entered valid credentials. If not, then don't.
      */
-    private boolean addPartyToDatabase() {
+    private boolean addPartyToDatabase(View v) {
 
-        EditText locationOfParty = (EditText) createEventDialog.findViewById(R.id.eventLocation);
-        EditText descriptionOfParty = (EditText) createEventDialog.findViewById(R.id.eventDescription);
-        EditText startTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventStartTime);
-        EditText endTimeOfParty = (EditText) createEventDialog.findViewById(R.id.eventEndTime);
-        EditText dateOfParty = (EditText) createEventDialog.findViewById(R.id.eventDate);
-        EditText buttonCreateParty = createEventDialog.findViewById(R.id.createEventButton);
+        EditText locationOfParty = (EditText) findViewById(R.id.eventLocation);
+        EditText descriptionOfParty = (EditText) findViewById(R.id.eventDescription);
+        EditText startTimeOfParty = (EditText) findViewById(R.id.eventStartTime);
+        EditText endTimeOfParty = (EditText) findViewById(R.id.eventEndTime);
+        EditText dateOfParty = (EditText) findViewById(R.id.eventDate);
+        EditText buttonCreateParty = findViewById(R.id.createEventButton);
 
         String location = locationOfParty.getText().toString().trim();
         String description = descriptionOfParty.getText().toString().trim();
@@ -328,13 +328,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
             return false;
         }
-    }
-
-    /**
-     * return to the main feed from the create event pop up.
-     */
-    public void returnToFeedFromCreateEventPopUpFromTextView() {
-
-        createEventDialog.dismiss();
     }
 }
