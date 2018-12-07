@@ -15,7 +15,9 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -84,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
         // connect to the real-time database
         databaseParties = FirebaseDatabase.getInstance().getReference("parties");
 
-        createEventDialog.setContentView(R.layout.createpartypopup);
+        //createEventDialog.setContentView(R.layout.createpartypopup);
 
+        // Choose the Home screen fragment at the beginning of creation
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new HomeFragment()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -140,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         createEventDialog.dismiss();
 
         // now return us to the window that can create an event.
-        createEventDialog.setContentView(R.layout.createpartypopup);
+        //createEventDialog.setContentView(R.layout.createpartypopup);
         createEventDialog.show();
     }
 
@@ -194,27 +199,6 @@ public class MainActivity extends AppCompatActivity {
 //        // Dismiss the pop up window
 //        if (addPartyToDatabase())
 //            createEventDialog.dismiss();
-//    }
-
-    /**
-     * Launch the Board Game Suggestions page
-     * @param v
-     */
-//    public void toBoardGameSuggestions(View v) {
-//
-//        // first things first, get the current window off the screen.
-//        eventCategoryFinder.animate().x(eventCategoryFinder.getWidth()).setDuration(animationDuration);
-//
-//        // move overlay
-//        categoriesLayout.animate().x(0).setDuration(animationDuration);
-//    }
-
-    /**
-     * Launch the Video Game Suggestion page.
-     * @param v
-     */
-//    public void toVideoGameSuggestions(View v) {
-//
 //    }
 
     /**
@@ -291,8 +275,8 @@ public class MainActivity extends AppCompatActivity {
         EditText descriptionOfParty = (EditText) findViewById(R.id.eventDescription);
         EditText startTimeOfParty = (EditText) findViewById(R.id.eventStartTime);
         EditText endTimeOfParty = (EditText) findViewById(R.id.eventEndTime);
-        EditText dateOfParty = (EditText) findViewById(R.id.eventDate);
-        EditText buttonCreateParty = findViewById(R.id.createEventButton);
+        EditText dateOfParty = (EditText)  findViewById(R.id.eventDate);
+        //EditText buttonCreateParty = findViewById(R.id.createEventButton);
 
         String location = locationOfParty.getText().toString().trim();
         String description = descriptionOfParty.getText().toString().trim();
