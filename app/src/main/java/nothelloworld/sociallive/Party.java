@@ -1,10 +1,5 @@
 package nothelloworld.sociallive;
 
-import java.sql.Time;
-import java.util.Date;
-import java.util.List;
-
-
 public class Party {
 
     //private User host;
@@ -16,6 +11,9 @@ public class Party {
     private String date;
     private String dateCreated;
     private String partyId;
+
+    private int numPeopleAttending;
+    private int numUpVotes;
 
     /**
      *
@@ -38,7 +36,15 @@ public class Party {
         this.date = date;
         this.dateCreated = dateCreated;
         this.partyId = partyId;
+
+        numPeopleAttending = 0;
+        numUpVotes = 0;
     }
+
+    public void setNumPeopleAttending(int peopleAttending) { this.numPeopleAttending = peopleAttending; }
+    public int getNumPeopleAttending() { return numPeopleAttending; }
+    public void setNumUpVotes(int upVote) { this.numUpVotes = upVote; }
+    public int getNumUpVotes() { return numUpVotes; }
 
     public String getLocation() { return location; }
     public String getDescription() { return description; }
