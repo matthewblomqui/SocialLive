@@ -11,6 +11,7 @@ public class Party {
     private String date;
     private String dateCreated;
     private String partyId;
+    private String mImageUrl;
 
     private int numPeopleAttending;
     private int numUpVotes;
@@ -25,6 +26,29 @@ public class Party {
      * @param dateCreated
      * @param partyId
      */
+
+    public Party()
+    {
+        //empty constructor needed
+    }
+
+    public Party(String location, String description, String startTime,
+                 String endTime, String date, String dateCreated,
+                 String partyId, String mImageUrl)
+    {
+        this.location = location;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.date = date;
+        this.dateCreated = dateCreated;
+        this.partyId = partyId;
+        this.mImageUrl = mImageUrl;
+
+        numPeopleAttending = 0;
+        numUpVotes = 0;
+    }
+
     public Party(String location, String description, String startTime,
                  String endTime, String date, String dateCreated,
                  String partyId)
@@ -36,10 +60,14 @@ public class Party {
         this.date = date;
         this.dateCreated = dateCreated;
         this.partyId = partyId;
+        this.mImageUrl = "";
 
         numPeopleAttending = 0;
         numUpVotes = 0;
     }
+
+    public String getImageUrl() { return mImageUrl; }
+    public void setImageUrl(String imageUrl) { mImageUrl = imageUrl; }
 
     public void setNumPeopleAttending(int peopleAttending) { this.numPeopleAttending = peopleAttending; }
     public int getNumPeopleAttending() { return numPeopleAttending; }
