@@ -1,9 +1,13 @@
 package nothelloworld.sociallive;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -13,16 +17,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,6 +53,26 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity {
 
+
+    /**
+     * Copied from create event fragment
+     */
+    private DatabaseReference databaseParties;
+
+    // variables for choosing images from your phone
+    private static final int PICK_IMAGE_REQUEST = 1;
+    //private TextView mTextViewShowUploads;
+    //private EditText mEditTextFileName;
+    private ImageView mImageView;
+
+    private Uri mImageUri;
+
+    private StorageReference mStorageRef;
+
+    /**
+     * Not comment for below code
+     * Just a place holder for code above
+     */
     private SharedPreferences userPreferences;
 
     // this will populate the popular section of our feed
@@ -51,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     // This is the pop up window to create a new event
     Dialog createEventDialog;
 
-    DatabaseReference databaseParties;
+    //DatabaseReference databaseParties;
     /**
      * On create. Create all of the backbone of what we are doing by creating and
      * initializing the vaiables.
@@ -86,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         // connect to the real-time database
         databaseParties = FirebaseDatabase.getInstance().getReference("parties");
 
-        //createEventDialog.setContentView(R.layout.createpartypopup);
+        createEventDialog.setContentView(R.layout.createpartypopup);
 
         // Choose the Home screen fragment at the beginning of creation
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -109,7 +144,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_create:
-                        selectedFragment = new CreateEventFragment();
+
+                        //selectedFragment = new CreateEventFragment();
+                        selectedFragment = new HomeFragment();
+                        createEvent();
                         break;
 
                     case R.id.nav_my_events:
@@ -121,6 +159,142 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+    /**
+     * TODO: Database stuff.......................................................................
+     * Copied from create event fragment
+     */
+    // used to get the file extension from the image
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    /**
+     * Create a new party and add it to the database.
+     * @return true if the user entered valid credentials. If not, then don't.
+     */
+    public void addPartyToDatabase(View v) {
+
+        LayoutInflater inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("WrongViewCast") View layout = inflater.inflate(R.layout.createpartypopup,
+                (ViewGroup) MainActivity.this.findViewById(R.id.eventLocation));
+
+        EditText locationOfParty = (EditText) layout.findViewById(R.id.eventLocation);
+        EditText descriptionOfParty = (EditText) v.findViewById(R.id.eventDescription);
+        EditText startTimeOfParty = (EditText) v.findViewById(R.id.eventStartTime);
+        EditText endTimeOfParty = (EditText) v.findViewById(R.id.eventEndTime);
+        EditText dateOfParty = (EditText)  v.findViewById(R.id.eventDate);
+
+        final String location = locationOfParty.getText().toString().trim();
+        final String description = descriptionOfParty.getText().toString().trim();
+        final String startTime = startTimeOfParty.getText().toString().trim();
+        final String endTime = endTimeOfParty.getText().toString().trim();
+        final String date = dateOfParty.getText().toString().trim();
+        final String dateCreated = new java.util.Date().toString();
+
+        //for uploading an image
+        if (mImageUri != null) {
+
+        } else {
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
+        }
+
+        // working on pattern checking for location
+        if (!checkDateString(date)) {
+            Toast.makeText(this, "Put in a valid Date!", Toast.LENGTH_SHORT).show();
+            return/* false*/;
+        }
+        if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
+            Toast.makeText(this, "Put in a valid start time!", Toast.LENGTH_SHORT).show();
+            return/* false*/;
+        }
+
+        Log.d("Main Activity", "location: "+location);
+
+        if (!TextUtils.isEmpty(location) && !TextUtils.isEmpty(description) && mImageUri != null) {
+            // for storing the image. This creates a unique id for the image
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            // check the progress of adding our image into storage
+            fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getApplicationContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
+
+                            final String id = databaseParties.push().getKey();
+
+                            // for getting the URL of our image to save in the database
+                            Task<Uri> uploadUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+
+                            uploadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    mImageUri = uri;
+
+                                    Party party = new Party(location, description, startTime, endTime,
+                                            date, dateCreated, id, mImageUri.toString());
+
+                                    // used to push the party into the database
+                                    //String uploadId = databaseParties.push().getKey();
+                                    databaseParties.child(id).setValue(party);
+
+                                    Toast.makeText(getApplicationContext(), "Party Created", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            //double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+
+                        }
+                    });
+
+        }
+        else if (mImageUri == null) {
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
+            return/* false*/;
+        }
+        else {
+            Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
+            return/* false*/;
+        }
+        return/* true*/;
+    }
+
+    public void openFileChooser(View v) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK &&
+                data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            Picasso.with(this).load(mImageUri).into(mImageView);
+            mImageView.setImageURI(mImageUri);
+        }
+    }
+    /**
+     * Not comment for below code
+     * Just a place holder for code above
+     */
 
     /**
      * The user has just created a username and hit save. Now let's save their username
@@ -145,7 +319,7 @@ public class MainActivity extends AppCompatActivity {
         createEventDialog.dismiss();
 
         // now return us to the window that can create an event.
-        //createEventDialog.setContentView(R.layout.createpartypopup);
+        createEventDialog.setContentView(R.layout.createpartypopup);
         createEventDialog.show();
     }
 
@@ -173,22 +347,22 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Launch the create event window. But first, check if the user is signed in, with
      * their username and password saved into Shared Preferences.
-     * @param v
+     * @param
      */
-//    public void createEvent(View v) {
-//
-//        // launch dialog activity
-//        String userName = userPreferences.getString("username", "nothinghere");
-//
-//        if (userName.equals("nothinghere")) {
-//            createEventDialog.setContentView(R.layout.loginpopup);
-//            createEventDialog.show();
-//        }
-//        else {
-//            createEventDialog.setContentView(R.layout.createpartypopup);
-//            createEventDialog.show();
-//        }
-//    }
+    public void createEvent(/*View v*/) {
+
+        // launch dialog activity
+        String userName = userPreferences.getString("username", "nothinghere");
+
+        if (userName.equals("nothinghere")) {
+            createEventDialog.setContentView(R.layout.loginpopup);
+            createEventDialog.show();
+        }
+        else {
+            createEventDialog.setContentView(R.layout.createpartypopup);
+            createEventDialog.show();
+        }
+    }
 
     /**
      * Dismiss the pop up to create an event.
@@ -269,48 +443,48 @@ public class MainActivity extends AppCompatActivity {
      * Create a new party and add it to the database.
      * @return true if the user entered valid credentials. If not, then don't.
      */
-    private boolean addPartyToDatabase(View v) {
-
-        EditText locationOfParty = (EditText) findViewById(R.id.eventLocation);
-        EditText descriptionOfParty = (EditText) findViewById(R.id.eventDescription);
-        EditText startTimeOfParty = (EditText) findViewById(R.id.eventStartTime);
-        EditText endTimeOfParty = (EditText) findViewById(R.id.eventEndTime);
-        EditText dateOfParty = (EditText)  findViewById(R.id.eventDate);
-        //EditText buttonCreateParty = findViewById(R.id.createEventButton);
-
-        String location = locationOfParty.getText().toString().trim();
-        String description = descriptionOfParty.getText().toString().trim();
-        String startTime = startTimeOfParty.getText().toString().trim();
-        String endTime = endTimeOfParty.getText().toString().trim();
-        String date = dateOfParty.getText().toString().trim();
-        String dateCreated = new java.util.Date().toString();
-
-        // working on pattern checking for location
-        if (!checkDateString(date)) {
-            Toast.makeText(this, "Put in a valid Date!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
-            Toast.makeText(this, "Put in a valid start time!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        Log.d("Main Activity", "location: "+location);
-
-        if (!TextUtils.isEmpty(location)) {
-            String id = databaseParties.push().getKey();
-
-            Party party = new Party(location, description, startTime, endTime,
-                    date, dateCreated, id);
-
-            databaseParties.child(id).setValue(party);
-
-            Toast.makeText(this, "Party Created", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        else {
-            Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
+//    private boolean addPartyToDatabase(View v) {
+//
+//        EditText locationOfParty = (EditText) findViewById(R.id.eventLocation);
+//        EditText descriptionOfParty = (EditText) findViewById(R.id.eventDescription);
+//        EditText startTimeOfParty = (EditText) findViewById(R.id.eventStartTime);
+//        EditText endTimeOfParty = (EditText) findViewById(R.id.eventEndTime);
+//        EditText dateOfParty = (EditText)  findViewById(R.id.eventDate);
+//        //EditText buttonCreateParty = findViewById(R.id.createEventButton);
+//
+//        String location = locationOfParty.getText().toString().trim();
+//        String description = descriptionOfParty.getText().toString().trim();
+//        String startTime = startTimeOfParty.getText().toString().trim();
+//        String endTime = endTimeOfParty.getText().toString().trim();
+//        String date = dateOfParty.getText().toString().trim();
+//        String dateCreated = new java.util.Date().toString();
+//
+//        // working on pattern checking for location
+//        if (!checkDateString(date)) {
+//            Toast.makeText(this, "Put in a valid Date!", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
+//            Toast.makeText(this, "Put in a valid start time!", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//
+//        Log.d("Main Activity", "location: "+location);
+//
+//        if (!TextUtils.isEmpty(location)) {
+//            String id = databaseParties.push().getKey();
+//
+//            Party party = new Party(location, description, startTime, endTime,
+//                    date, dateCreated, id);
+//
+//            databaseParties.child(id).setValue(party);
+//
+//            Toast.makeText(this, "Party Created", Toast.LENGTH_LONG).show();
+//            return true;
+//        }
+//        else {
+//            Toast.makeText(this, "You must set a location", Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+//    }
 }

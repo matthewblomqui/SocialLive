@@ -4,26 +4,6 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-162dp" />
-
-    <Button
-        android:id="@+id/chooseImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="174dp"
-        android:background="@drawable/buttonstyling"
-        android:textColor="#00cc99"
-        android:width="140dp"
-        android:height="50dp"
-        android:text="Choose Image" />
-
     <EditText
         android:id="@+id/titleEvent"
         android:layout_width="wrap_content"
@@ -91,6 +71,26 @@
         android:clickable="true"
         android:text="Create Event"
         android:textColor="#00cc99" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-162dp" />
+
+    <Button
+        android:id="@+id/chooseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="174dp"
+        android:background="@drawable/buttonstyling"
+        android:textColor="#00cc99"
+        android:width="140dp"
+        android:height="50dp"
+        android:text="Choose Image" />
 
     <EditText
         android:id="@+id/eventEndTime"
