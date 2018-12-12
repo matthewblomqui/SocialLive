@@ -30,7 +30,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:hint="Date of Event"
+        android:hint="Date of Event: 09/11"
         android:inputType="date"
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorAccent"
