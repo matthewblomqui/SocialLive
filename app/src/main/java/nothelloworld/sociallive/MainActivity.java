@@ -307,24 +307,24 @@ public class MainActivity extends AppCompatActivity {
      */
     public void createIdentification(View v) {
 
-        EditText edit = (EditText)createEventDialog.findViewById(R.id.user);
-        String result = edit.getText().toString();
+        //EditText edit = (EditText)createEventDialog.findViewById(R.id.user);
+        //String result = edit.getText().toString();
 
-        Log.d("Main Activity", "Storing this into shared preferences "+result);
+        //Log.d("Main Activity", "Storing this into shared preferences "+result);
 
-        userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor prefEditor = userPreferences.edit();
-        prefEditor.putString("username", result);
-        Log.v("A message", "Hello?!");
+        //userPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //SharedPreferences.Editor prefEditor = userPreferences.edit();
+        //prefEditor.putString("username", result);
+        //Log.v("A message", "Hello?!");
         // store username from text editor in the login page.
 
-        prefEditor.apply();
+        /*prefEditor.apply();
 
         createEventDialog.dismiss();
 
         // now return us to the window that can create an event.
         createEventDialog.setContentView(R.layout.createpartypopup);
-        createEventDialog.show();
+        createEventDialog.show();*/
     }
 
     /*******************************************************************************

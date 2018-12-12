@@ -1,5 +1,6 @@
 package nothelloworld.sociallive;
 
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -55,6 +56,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
     private Button mButtonChooseImage;
     private Button mButtonUpload;
+    Dialog signInDialog;
 
     @Nullable
     @Override
@@ -71,6 +73,12 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
         mButtonChooseImage = v.findViewById(R.id.chooseImage);
         mButtonUpload = v.findViewById(R.id.createEventButton);
+        //categoriesLayout = findViewById(R.id.categoriesLayout);
+
+        // try to launch the sign in dialog
+        signInDialog = new Dialog(getActivity());
+        signInDialog.setContentView(R.layout.loginpopup);
+        signInDialog.show();
 
         //createEventButton.setOnClickListener(this);
         //chooseImage.setOnClickListener(this);
