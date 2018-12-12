@@ -182,6 +182,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         EditText startTimeOfParty = (EditText) getView().findViewById(R.id.eventStartTime);
         EditText endTimeOfParty = (EditText) getView().findViewById(R.id.eventEndTime);
         EditText dateOfParty = (EditText)  getView().findViewById(R.id.eventDate);
+        EditText titleOfEvent = (EditText) getView().findViewById(R.id.titleEvent);
 
         final String location = locationOfParty.getText().toString().trim();
         final String description = descriptionOfParty.getText().toString().trim();
@@ -189,6 +190,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         final String endTime = endTimeOfParty.getText().toString().trim();
         final String date = dateOfParty.getText().toString().trim();
         final String dateCreated = new java.util.Date().toString();
+        final String title = titleOfEvent.getText().toString().trim();
 
         //for uploading an image
         if (mImageUri != null) {
@@ -231,7 +233,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                                 public void onSuccess(Uri uri) {
                                     mImageUri = uri;
 
-                                    Party party = new Party(location, description, startTime, endTime,
+                                    Party party = new Party(title, location, description, startTime, endTime,
                                             date, dateCreated, id, mImageUri.toString());
 
                                     // used to push the party into the database

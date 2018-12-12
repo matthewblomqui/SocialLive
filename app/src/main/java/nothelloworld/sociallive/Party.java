@@ -12,6 +12,7 @@ public class Party {
     private String dateCreated;
     private String partyId;
     private String mImageUrl;
+    private String title;
 
     private int numPeopleAttending;
     private int numUpVotes;
@@ -32,7 +33,7 @@ public class Party {
         //empty constructor needed
     }
 
-    public Party(String location, String description, String startTime,
+    public Party(String title, String location, String description, String startTime,
                  String endTime, String date, String dateCreated,
                  String partyId, String mImageUrl)
     {
@@ -44,12 +45,13 @@ public class Party {
         this.dateCreated = dateCreated;
         this.partyId = partyId;
         this.mImageUrl = mImageUrl;
+        this.title = title;
 
         numPeopleAttending = 0;
         numUpVotes = 0;
     }
 
-    public Party(String location, String description, String startTime,
+    public Party(String title, String location, String description, String startTime,
                  String endTime, String date, String dateCreated,
                  String partyId)
     {
@@ -61,6 +63,7 @@ public class Party {
         this.dateCreated = dateCreated;
         this.partyId = partyId;
         this.mImageUrl = "";
+        this.title = title;
 
         numPeopleAttending = 0;
         numUpVotes = 0;
@@ -81,4 +84,5 @@ public class Party {
     public String getDate() { return date; }
     public String getDateCreated() { return dateCreated; }
     public String getPartyId() { return partyId; }
+    public String getTitle() { return title; }
 }
