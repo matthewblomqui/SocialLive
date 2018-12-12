@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * TODO: pull from database (recycleView)
+ */
 public class HomeFragment extends Fragment {
 
     @Nullable

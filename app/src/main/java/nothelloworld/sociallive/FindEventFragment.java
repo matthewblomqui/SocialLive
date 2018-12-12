@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+/**
+ * TODO: Firebase search parties
+ */
 public class FindEventFragment extends Fragment implements View.OnClickListener {
 
     @Nullable

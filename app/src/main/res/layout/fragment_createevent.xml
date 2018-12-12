@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/colorPrimary">
@@ -10,13 +11,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="238dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Title of Your Event"
         android:inputType="textPersonName"
         android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/eventDate"
@@ -24,13 +27,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleEvent"
         android:layout_alignStart="@+id/titleEvent"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Date of Event"
         android:inputType="date"
         android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
 
     <EditText
         android:id="@+id/eventStartTime"
@@ -38,27 +43,31 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/titleEvent"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="179dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Start Time of Event"
         android:inputType="time"
         android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@+id/eventDate"
+        app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
 
     <EditText
         android:id="@+id/eventDescription"
         android:layout_width="366dp"
-        android:layout_height="91dp"
+        android:layout_height="72dp"
         android:layout_alignStart="@+id/titleEvent"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginBottom="82dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="textMultiLine"
         android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventEndTime" />
 
     <Button
         android:id="@+id/createEventButton"
@@ -66,18 +75,26 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="42dp"
         android:background="@drawable/buttonstyling"
         android:clickable="true"
         android:text="Create Event"
-        android:textColor="#00cc99" />
+        android:textColor="#00cc99"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view" />
 
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-162dp" />
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventDescription" />
 
     <Button
         android:id="@+id/chooseImage"
@@ -85,12 +102,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="174dp"
-        android:background="@drawable/buttonstyling"
-        android:textColor="#00cc99"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="10dp"
         android:width="140dp"
         android:height="50dp"
-        android:text="Choose Image" />
+        android:background="@drawable/buttonstyling"
+        android:text="Choose Image"
+        android:textColor="#00cc99"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view" />
 
     <EditText
         android:id="@+id/eventEndTime"
@@ -98,12 +118,15 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/eventStartTime"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="End Time of Event"
         android:inputType="time"
         android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventDate" />
 
     <EditText
         android:id="@+id/eventLocation"
@@ -111,10 +134,14 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/eventDate"
         android:layout_alignEnd="@+id/eventDescription"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Location"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorAccent"
-        android:textColor="@color/colorAccent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleEvent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

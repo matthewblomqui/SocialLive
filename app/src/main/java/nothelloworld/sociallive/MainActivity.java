@@ -45,10 +45,10 @@ import java.util.List;
  *
  * TODO: <MYEVENTSFRAGMENT>Dialog for viewing events (myEvents and events going to)
  * TODO: <CREATEEVENTFRAGMENT>copy past create event page and add picture capability from database
- * TODO: <SEARCHFRAGRMENT>copy past search page, add dialog pop up for categories
+ * TODO: <SEARCHFRAGRMENT>add dialog pop up for categories
  * TODO: <HOME> implement recycle view
  * TODO: Search bar and slide up with that bar
- * TODO: Pulling from and pushing with the database (emphasize images and pulling data)
+ * TODO: <HOME>Pulling from database
  * TODO: User authentication with firebase
  */
 public class MainActivity extends AppCompatActivity {

@@ -33,6 +33,11 @@ import com.squareup.picasso.Picasso;
 
 import static android.app.Activity.RESULT_OK;
 
+/**
+ * TODO: Pattern checking fixes
+ * TODO: Clear form (also button)
+ * TODO: Check for duplicates in database
+ */
 public class CreateEventFragment extends Fragment implements View.OnClickListener {
 
     private DatabaseReference databaseParties;
