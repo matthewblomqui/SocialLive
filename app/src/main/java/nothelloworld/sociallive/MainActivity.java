@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         userPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
 
+        mImageView = findViewById(R.id.image_view);
+
         // find the overlay
         //eventCategoryFinder = findViewById(R.id.findEventWindow);
         //categoriesLayout = findViewById(R.id.categoriesLayout);
@@ -145,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_create:
 
-                        //selectedFragment = new CreateEventFragment();
-                        selectedFragment = new HomeFragment();
-                        createEvent();
+                        selectedFragment = new CreateEventFragment();
+                        //selectedFragment = new HomeFragment();
+                        //createEvent();
                         break;
 
                     case R.id.nav_my_events:
@@ -287,6 +289,8 @@ public class MainActivity extends AppCompatActivity {
                 data != null && data.getData() != null) {
             mImageUri = data.getData();
 
+            mImageView = findViewById(R.id.image_view);
+
             Picasso.with(this).load(mImageUri).into(mImageView);
             mImageView.setImageURI(mImageUri);
         }
@@ -361,6 +365,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             createEventDialog.setContentView(R.layout.createpartypopup);
             createEventDialog.show();
+            mImageView = findViewById(R.id.image_view);
         }
     }
 

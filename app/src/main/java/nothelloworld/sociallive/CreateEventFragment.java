@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +46,10 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private Uri mImageUri;
 
     private StorageReference mStorageRef;
+    private StorageTask mUploadTask;
 
+    private Button mButtonChooseImage;
+    private Button mButtonUpload;
 
     @Nullable
     @Override
@@ -57,29 +61,51 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         View v = inflater.inflate(R.layout.fragment_createevent, container, false);
 
         // these buttons will be needed for choosing images as well
-        Button createEventButton = (Button) v.findViewById(R.id.createEventButton);
-        Button chooseImage = (Button) v.findViewById(R.id.chooseImage);
+        //Button createEventButton = (Button) v.findViewById(R.id.createEventButton);
+        //Button chooseImage = (Button) v.findViewById(R.id.chooseImage);
 
-        createEventButton.setOnClickListener(this);
-        chooseImage.setOnClickListener(this);
+        mButtonChooseImage = v.findViewById(R.id.chooseImage);
+        mButtonUpload = v.findViewById(R.id.createEventButton);
+
+        //createEventButton.setOnClickListener(this);
+        //chooseImage.setOnClickListener(this);
 
         //mTextViewShowUploads = v.findViewsWithText(R.id.);
         mImageView = v.findViewById(R.id.image_view);
+
+        mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
+
+        mButtonUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(getActivity(), "Upload in Progress", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    addPartyToDatabase(v);
+                }
+            }
+        });
 
         return v;
 
     }
 
-    @Override
+   @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.createEventButton:
-                addPartyToDatabase(v);
-                break;
-            case R.id.chooseImage:
+            //case R.id.createEventButton:
+              //  addPartyToDatabase(v);
+                //break;
+           // case R.id.chooseImage:
                 // TODO: Taylor this is on you!:D
-                    openFileChooser();
-                break;
+                   // openFileChooser();
+              //  break;
             default:
                 break;
         }
@@ -159,14 +185,14 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         }
 
         // working on pattern checking for location
-        if (!checkDateString(date)) {
-            Toast.makeText(getActivity(), "Put in a valid Date!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
-            Toast.makeText(getActivity(), "Put in a valid start time!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+        //if (!checkDateString(date)) {
+          //  Toast.makeText(getActivity(), "Put in a valid Date!", Toast.LENGTH_SHORT).show();
+           // return false;
+        //}
+        //if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
+          //  Toast.makeText(getActivity(), "Put in a valid start time!", Toast.LENGTH_SHORT).show();
+           // return false;
+        //}
 
         Log.d("Main Activity", "location: "+location);
 
@@ -176,7 +202,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             + "." + getFileExtension(mImageUri));
 
             // check the progress of adding our image into storage
-            fileReference.putFile(mImageUri)
+            mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
