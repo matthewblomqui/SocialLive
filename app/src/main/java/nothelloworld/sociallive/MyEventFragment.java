@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * TODO: show created parties here
+ */
 public class MyEventFragment extends Fragment {
 
     @Nullable
