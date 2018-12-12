@@ -17,7 +17,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -134,7 +133,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         for (int i = 0; i < 2; i++)
             if (!Character.isDigit(date.charAt(i))) return false;
 
-        if (date.charAt(2) != '-') return false;
+        if (date.charAt(2) != '-' || date.charAt(2) != '/') return false;
 
         for (int i = 3; i < 5; i++)
             if (!Character.isDigit(date.charAt(i))) return false;
@@ -159,9 +158,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         for (int i = 3; i < 5; i++)
             if (!Character.isDigit(time.charAt(i))) return false;
 
-        String beyondMidnight = time.substring(5);
-
-        return (!beyondMidnight.equals("AM") && !beyondMidnight.equals("PM"));
+        return true;
     }
 
     // used to get the file extension from the image
@@ -200,14 +197,14 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         }
 
         // working on pattern checking for location
-        //if (!checkDateString(date)) {
-          //  Toast.makeText(getActivity(), "Put in a valid Date!", Toast.LENGTH_SHORT).show();
-           // return false;
-        //}
-        //if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
-          //  Toast.makeText(getActivity(), "Put in a valid start time!", Toast.LENGTH_SHORT).show();
-           // return false;
-        //}
+        if (!checkDateString(date)) {
+            Toast.makeText(getActivity(), "Put in a valid Date!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!checkStartTime(startTime) || !checkStartTime(endTime)) {
+            Toast.makeText(getActivity(), "Put in a valid start time!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         Log.d("Main Activity", "location: "+location);
 
